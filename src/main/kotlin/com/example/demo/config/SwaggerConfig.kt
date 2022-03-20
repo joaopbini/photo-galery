@@ -29,18 +29,7 @@ class SwaggerConfig {
                     .version("v0.0.1")
                     .license(License().name("Apache 2.0").url("https://springdoc.org"))
             )
-            .servers(
-                listOf(
-                    Server().apply {
-                        url = "http://localhost:8080"
-                        description = "Local"
-//                        variables = ServerVariables().apply { addServerVariable("http", listOf("https")) }
-                    },
-                    Server().apply {
-                        url = "https://tdc-xih52cdawq-rj.a.run.app"
-                        description = "Cloud Run"
-                    })
-            )
+            .addServersItem(Server().url("/"))
             .externalDocs(
                 ExternalDocumentation()
                     .description("SpringShop Wiki Documentation")
