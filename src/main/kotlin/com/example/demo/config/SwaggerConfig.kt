@@ -32,8 +32,8 @@ class SwaggerConfig {
             .addServersItem(Server().url("/"))
             .externalDocs(
                 ExternalDocumentation()
-                    .description("SpringShop Wiki Documentation")
-                    .url("https://springshop.wiki.github.org/docs")
+                    .description("Spring Wiki Documentation")
+                    .url("https://spring.wiki.github.org/docs")
             )
     }
 
