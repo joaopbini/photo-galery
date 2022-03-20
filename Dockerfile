@@ -1,0 +1,9 @@
+ARG JDK_VERSION=11-jre-slim
+
+FROM openjdk:${JDK_VERSION}
+
+COPY target/*.jar app.jar
+
+EXPOSE 8080
+
+CMD java $JAVA_OPTS -jar $SPRING_PROFILE app.jar $SPRING_PROPERTIES

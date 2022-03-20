@@ -1,0 +1,15 @@
+steps:
+  - name: maven:3-jdk-11
+    entrypoint: mvn
+    args: ["test"]
+  - name: maven:3-jdk-11
+    entrypoint: mvn
+    args: ["package", "-Dmaven.test.skip=true"]
+  - name: gcr.io/cloud-builders/docker
+    args: ["build", "-t", "gcr.io/tdc-project-one/tdc", "--build-arg=JAR_FILE=target/*.jar", "."]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/tdc-project-one/tdc']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'tdc', '--image', 'gcr.io/tdc-project-one/tdc', '--region', 'southamerica-east1', '--allow-unauthenticated']
+images: ["gcr.io/tdc-project-one/tdc"]
