@@ -31,8 +31,8 @@ class PhotoService(
         return storageComponent.getDownloadUrl(photo.filePath)
     }
 
-    fun findAllByLabel(categoria: String): List<Photo> {
-        return photoRepository.findAllByLabels(categoria)
+    fun findAllByLabel(label: String): List<Photo> {
+        return photoRepository.findAllByLabels(label)
     }
 
 }
