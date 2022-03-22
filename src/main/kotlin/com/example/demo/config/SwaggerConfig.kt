@@ -5,7 +5,6 @@ import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Info
 import io.swagger.v3.oas.models.info.License
 import io.swagger.v3.oas.models.servers.Server
-import io.swagger.v3.oas.models.servers.ServerVariables
 import org.springdoc.core.GroupedOpenApi
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -16,7 +15,7 @@ class SwaggerConfig {
     @Bean
     fun publicApi(): GroupedOpenApi =
         GroupedOpenApi.builder()
-            .group("tdc-public")
+            .group("tdc-api")
             .pathsToMatch("/**")
             .build()
 
@@ -24,8 +23,8 @@ class SwaggerConfig {
     fun springShopOpenAPI(): OpenAPI? {
         return OpenAPI()
             .info(
-                Info().title("Spring API")
-                    .description("Spring sample application")
+                Info().title("TDC API")
+                    .description("TDC sample application")
                     .version("v0.0.1")
                     .license(License().name("Apache 2.0").url("https://springdoc.org"))
             )

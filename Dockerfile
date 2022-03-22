@@ -1,6 +1,4 @@
-ARG JDK_VERSION=11-jre-slim
-
-FROM openjdk:${JDK_VERSION}
+FROM openjdk:11-jre-slim
 
 COPY target/*.jar app.jar
 
