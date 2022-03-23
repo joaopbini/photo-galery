@@ -16,8 +16,8 @@ class PhotoApi(private val photoService: PhotoService) {
         return photoService.create(description, file)
     }
 
-    @GetMapping("/download-url")
-    fun urlDownload(@RequestParam filePath: String) = photoService.downloadUrlById(filePath)
+    @GetMapping("/download-url/{id}")
+    fun urlDownload(@PathVariable id: String) = photoService.downloadUrlById(id)
 
     @GetMapping("/find/label")
     fun findByLabel(@RequestParam label: String) = photoService.findAllByLabel(label)
