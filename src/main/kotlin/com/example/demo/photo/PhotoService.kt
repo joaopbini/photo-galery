@@ -13,7 +13,7 @@ class PhotoService(
     private val cloudVisionTemplate: CloudVisionTemplate
 ) {
 
-    fun create(file: MultipartFile): Photo {
+    fun create(description: String, file: MultipartFile): Photo {
 
         val fileId = storageComponent.upload(file) ?: ""
 
@@ -21,7 +21,7 @@ class PhotoService(
 
         val labels = visionResponse.labelAnnotationsList.take(5).map { it.description }
 
-        return photoRepository.save(Photo( filePath = fileId, labels = labels))
+        return photoRepository.save(Photo(description = description, filePath = fileId, labels = labels))
     }
 
     fun findById(id: String): Photo? = photoRepository.findById(id).orElse(null)

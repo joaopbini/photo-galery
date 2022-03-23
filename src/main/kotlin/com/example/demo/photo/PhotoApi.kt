@@ -12,8 +12,8 @@ class PhotoApi(private val photoService: PhotoService) {
     fun findById(@PathVariable id: String) = photoService.findById(id)
 
     @PostMapping("/create", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE])
-    fun create(@RequestParam("file") file: MultipartFile): Photo {
-        return photoService.create(file)
+    fun create(@RequestParam description: String, @RequestParam("file") file: MultipartFile): Photo {
+        return photoService.create(description, file)
     }
 
     @GetMapping("/download-url")

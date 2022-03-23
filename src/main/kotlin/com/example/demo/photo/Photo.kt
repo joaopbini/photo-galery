@@ -2,16 +2,18 @@ package com.example.demo.photo
 
 import com.google.cloud.spring.data.datastore.core.mapping.Entity
 import org.springframework.data.annotation.Id
-import java.util.UUID
+import java.util.*
 
 @Entity
 data class Photo(
 
     @Id
-    var id: String = UUID.randomUUID().toString(),
+    val id: String = UUID.randomUUID().toString(),
 
-    var labels: List<String> = listOf(),
+    val description: String = "",
 
-    var filePath: String = ""
+    val filePath: String = "",
+
+    val labels: List<String> = listOf()
 
 )
