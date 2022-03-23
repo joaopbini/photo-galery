@@ -47,7 +47,7 @@ class PhotoServiceTest {
 
         every { photoRepository.save(capture(photoSlot)) } returns Photo()
 
-        photoService.create(multipartFile)
+        photoService.create("description", multipartFile)
 
         assertEquals("id", photoSlot.captured.filePath)
 
