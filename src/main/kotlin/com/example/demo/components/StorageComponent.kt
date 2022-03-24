@@ -25,7 +25,7 @@ class StorageComponent(private val storage: Storage) {
         val contentType = file.contentType
         val allowedType = allowedContentType.contains(contentType)
 
-        if (allowedType.not()) error("Content type not allowed!")
+        if (allowedType.not()) error("Content type $contentType not allowed!")
 
         return storage.create(buildBlobInfo(file), file.bytes).blobId.name
     }
