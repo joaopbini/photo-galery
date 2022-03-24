@@ -15,9 +15,9 @@ class PhotoService(
 
     fun create(description: String, file: MultipartFile): Photo {
 
-        val visionResponse = cloudVisionTemplate.analyzeImage(file.resource, Feature.Type.LABEL_DETECTION)
-
         val fileId = storageComponent.upload(file) ?: ""
+
+        val visionResponse = cloudVisionTemplate.analyzeImage(file.resource, Feature.Type.LABEL_DETECTION)
 
         val labels = visionResponse.labelAnnotationsList.take(5).map { it.description }
 
