@@ -4,9 +4,8 @@
 
 [Cloud Build Configs](https://cloud.google.com/build/docs/build-config-file-schema)
 
+###Deploy 
 `gcloud builds submit`
-
-`gcloud run deploy`
 
 
 ## Passos

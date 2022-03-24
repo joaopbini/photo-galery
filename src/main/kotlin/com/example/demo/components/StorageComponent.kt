@@ -31,8 +31,8 @@ class StorageComponent(private val storage: Storage) {
     }
 
     fun getDownloadUrl(filename: String): String {
-        return storage.get("tdc-bucket", filename)
-            .signUrl(60, TimeUnit.HOURS, Storage.SignUrlOption.withV4Signature())
+        val blobInfo = BlobInfo.newBuilder(bucketName, filename).build()
+        return storage.signUrl(blobInfo, 60, TimeUnit.HOURS)
             .toString()
     }
 
