@@ -28,7 +28,7 @@ class PhotoService(
 
     fun downloadUrlById(id: String): String {
         val photo = findById(id) ?: throw RuntimeException("Photo não encontrada.")
-        return storageComponent.getDownloadUrl(photo.id)
+        return storageComponent.getDownloadUrl(photo.filePath)
     }
 
     fun findAllByLabel(label: String): List<Photo> {
