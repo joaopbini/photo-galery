@@ -6,14 +6,8 @@ import java.util.*
 
 @Entity
 data class Photo(
-
-    @Id
-    val id: String = UUID.randomUUID().toString(),
-
+    @Id val id: String = UUID.randomUUID().toString(),
     val description: String = "",
-
     val filePath: String = "",
-
-    val labels: List<String> = listOf()
-
+    val labels: List<String> = listOf(),
 )
