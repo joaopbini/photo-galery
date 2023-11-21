@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository
 interface PhotoRepository : DatastoreRepository<Photo, String> {
 
     fun findAllByLabels(label: String): List<Photo>
-
 }

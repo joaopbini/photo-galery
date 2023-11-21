@@ -8,8 +8,5 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 class ExceptionHandlerConfig {
 
     @ExceptionHandler(Exception::class)
-    fun handle(ex: Exception): ResponseEntity<String> {
-        return ResponseEntity.badRequest().body(ex.message)
-    }
-
+    fun handle(ex: Exception) = ResponseEntity.badRequest().body(ex.message)
 }

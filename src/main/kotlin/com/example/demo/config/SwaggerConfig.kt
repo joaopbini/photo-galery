@@ -20,8 +20,8 @@ class SwaggerConfig {
             .build()
 
     @Bean
-    fun springShopOpenAPI(): OpenAPI? {
-        return OpenAPI()
+    fun springShopOpenAPI() =
+        OpenAPI()
             .info(
                 Info().title("TDC API")
                     .description("TDC sample application")
@@ -34,6 +34,4 @@ class SwaggerConfig {
                     .description("Spring Wiki Documentation")
                     .url("https://spring.wiki.github.org/docs")
             )
-    }
-
 }

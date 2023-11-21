@@ -13,26 +13,29 @@ class PhotoService(
     private val cloudVisionTemplate: CloudVisionTemplate
 ) {
 
-    fun create(description: String, file: MultipartFile): Photo {
-
-        val fileId = storageComponent.upload(file) ?: ""
-
-        val visionResponse = cloudVisionTemplate.analyzeImage(file.resource, Feature.Type.LABEL_DETECTION)
-
-        val labels = visionResponse.labelAnnotationsList.take(5).map { it.description }
-
-        return photoRepository.save(Photo(description = description, filePath = fileId, labels = labels))
-    }
+    fun create(description: String, file: MultipartFile) =
+        extractLabels(file, 5).let { storePhoto(file, description, it) }
 
     fun findById(id: String): Photo? = photoRepository.findById(id).orElse(null)
 
-    fun downloadUrlById(id: String): String {
-        val photo = findById(id) ?: throw RuntimeException("Photo não encontrada.")
-        return storageComponent.getDownloadUrl(photo.filePath)
-    }
+    fun downloadUrlById(id: String) = findById(id)
+        ?.let { storageComponent.getDownloadUrl(it.filePath) }
+        ?: throw RuntimeException("Photo não encontrada.")
 
-    fun findAllByLabel(label: String): List<Photo> {
-        return photoRepository.findAllByLabels(label)
-    }
+    fun findAllByLabel(label: String) = photoRepository.findAllByLabels(label)
 
+    private fun storePhoto(file: MultipartFile, description: String, labels: List<String>) =
+        storageComponent
+            .upload(file)
+            ?.let { filePath -> Photo(description = description, filePath = filePath, labels = labels) }
+            .let { photoRepository.save(it) }
+
+    private fun extractLabels(file: MultipartFile, numberOfLabels: Int): List<String> {
+        val labels = cloudVisionTemplate
+            .analyzeImage(file.resource, Feature.Type.LABEL_DETECTION)
+            .labelAnnotationsList
+            .take(numberOfLabels)
+            .map { it.description }
+        return labels
+    }
 }
